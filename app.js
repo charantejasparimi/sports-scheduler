@@ -306,9 +306,9 @@ app.get('/admin', async (req, res) => {
     const adminName = global.adminFirstName+global.adminLastName;
     const adminEmail=global.adminEmail
     console.log("Email :",adminEmail,"Name",adminName)
-    // if (adminEmail==undefined || adminName==undefined) {
-    //   res.redirect('login');
-    // }
+    if (adminEmail==undefined || adminName==undefined) {
+      res.redirect('login');
+    }
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
     const sessionData = await sessions.findAll();
