@@ -132,6 +132,7 @@ app.post('/create-player', async (req, res) => {
       last:lastName,
       email,
       password: hashedPwd,
+      fullname:firstName+lastName
    });
     console.log(newPlayers)
     res.redirect("/login")
@@ -163,7 +164,6 @@ app.post('/create-players', async (req, res) => {
       last:lastName,
       email,
       password: hashedPwd,
-      // fullname:firstName+lastName
     });
     // console.log(newPlayer)
     res.redirect("/login")

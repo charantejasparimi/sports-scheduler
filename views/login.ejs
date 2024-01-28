@@ -207,7 +207,7 @@
         <% for (let i = 0; i < ad.length; i++) { %>
             '<%= ad[i].dataValues.email %>',
         <% } %>
-          ];
+          ];  
         
     // Check if emailInput is present in the emailsList
     if (!emailsList.includes(emailInput)) {
@@ -233,8 +233,8 @@
     // Check if emailInput is present in the emailsList
     if (!emailsList.includes(emailInput)) {
             var errorMessage = document.getElementById('show1');
-            errorMessage.innerHTML = 'Email is invalid';
-            return false; 
+            // errorMessage.innerHTML = 'Email is invalid'+emailsList;
+            return true; 
         }
         return true
         // Allow form submission
