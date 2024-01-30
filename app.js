@@ -120,6 +120,7 @@ app.post('/create-player', async (req, res) => {
   try {
     // create account for player 
     const { first, last, email, password} = req.body;
+    const him="successfully created accountll"
     // console.log(req.body)
     if (!first|| !last|| !email || !password) {
       return res.status(400).json({ error: 'All fields are required.' });
@@ -135,7 +136,7 @@ app.post('/create-player', async (req, res) => {
       fullname:firstName+lastName
    });
     console.log(newPlayers)
-    res.redirect("/login")
+    res.render('login',{him});
     // req.login(newPlayer, (err) => {
     //   if (err) {
     //     console.log(err);
@@ -152,6 +153,7 @@ app.post('/create-player', async (req, res) => {
 app.post('/create-players', async (req, res) => {
   try {
     const { first, last, email, password} = req.body;
+    const him="successfully created account"
     // console.log(req.body)
     if (!first|| !last|| !email || !password) {
       return res.status(400).json({ error: 'All fields are required.' });
@@ -166,7 +168,7 @@ app.post('/create-players', async (req, res) => {
       password: hashedPwd,
     });
     // console.log(newPlayer)
-    res.redirect("/login")
+    res.render('login',{him});
     // req.login(newPlayer, (err) => {
     //   if (err) {
     //     console.log(err);
@@ -181,9 +183,7 @@ app.post('/create-players', async (req, res) => {
 
 // section player
 
-app.post(
-  "/sectionPlayer",
-  passport.authenticate("local", {
+app.post("/sectionPlayer",passport.authenticate("local", {
     failureRedirect: "/login",
   }),
   connectEnsureLogin.ensureLoggedIn(),
@@ -204,32 +204,63 @@ app.post(
 );
 
 app.get("/signup", (request, response) => {
-  response.render("signup");
+  let him="successfully created account"
+  response.render("signup",{him});
 });
 app.get("/sigupadmin", (request, response) => {
-  response.render("sigupadmin");
+  let him="successfully created account"
+  response.render("sigupadmin",{him});
 });
 app.get("/forgotuser", (request, response) => {
-  response.render("forgotuser");
+  let him="password reset successfull"
+  response.render("forgotuser",{him});
 });
 app.get("/forgotadmin", (request, response) => {
-  response.render("forgotadmin");
+  let him="password reset successfull"
+  response.render("forgotadmin",{him});
 });
+
+// app.get("/createsport11", (request, response) => {
+//    const adminName = global.adminFirstName+global.adminLastName;
+//     const adminEmail=global.adminEmail
+//     console.log("Email :",adminEmail,"Name",adminName)
+//     if (adminEmail==undefined || adminName==undefined) {
+//       res.redirect('login');
+//     }
+//     const sportsList = await sports.findAll();
+//     const matchesList = await matches.findAll();
+//     const sessionData = await sessions.findAll();
+//   response.render("createsport", { sports: sportsList, matches: matchesList, sessionData,adminName,adminEmail}); // Assuming you have a createsport.ejs file
+// });
+
+// app.get("/creatematch11", (request, response) => {
+//   response.render("creatematch.ejs"); // Assuming you have a creatematch.ejs file
+// });
+
+// app.get("/joinmatch11", (request, response) => {
+//   response.render("joinmatch"); // Assuming you have a joinmatch.ejs file
+// });
+
+// app.get("/displayall11", (request, response) => {
+//   response.render("displayall"); // Assuming you have a displayall.ejs file
+// });
+
 app.get("/login",async (request, response) => {
-  const ad = await adminModel.findAll();
-  const us=await playerModel.findAll();
-  response.render("login",{ad,us});
+  global.adminEmail=undefined
+  global.userEmail=undefined
+  const him = request.body.him || '';
+  console.log(him,request.query.him)
+  response.render("login",{him});
 });
 
 app.post('/forgotad', async (req, res) => {
   try {
     // create account for admin
     const { first, last, email, password } = req.body;
-
+    const him="your password is updated"
     if (!first || !last || !email || !password) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
-
     const firstName = first;
     const lastName = last;
     const hashedPwd = await bcrypt.hash(password, saltRounds);
@@ -248,7 +279,7 @@ app.post('/forgotad', async (req, res) => {
       await existingAdmin.update({
         password: hashedPwd,
       });
-      res.redirect("/login");
+      res.render('login',{him});
     } else {
       res.status(404).json({ error: 'Admin not found.' });
     }
@@ -262,6 +293,7 @@ app.post('/forgot', async (req, res) => {
   try {
     // create account for player
     const { first, last, email, password } = req.body;
+    const him="your password is updated"
 
     if (!first || !last || !email || !password) {
       return res.status(400).json({ error: 'All fields are required.' });
@@ -283,7 +315,7 @@ app.post('/forgot', async (req, res) => {
       await existingPlayer.update({
         password: hashedPwd,
       });
-      res.redirect("/login");
+      res.render('login',{him});
     } else {
       res.status(404).json({ error: 'Player not found.' });
     }
@@ -294,6 +326,7 @@ app.post('/forgot', async (req, res) => {
 });
 
 app.get("/signout", (request, response, next) => {
+
   request.logout((err) => {
     if (err) {
       return next(err);
@@ -305,17 +338,20 @@ app.get('/admin', async (req, res) => {
   try {
     const adminName = global.adminFirstName+global.adminLastName;
     const adminEmail=global.adminEmail
+    const him="please login"
     console.log("Email :",adminEmail,"Name",adminName)
     if (adminEmail==undefined || adminName==undefined) {
-      res.redirect('login');
-    }
+      res.redirect('/login?him=' + encodeURIComponent(him));
+    } 
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
     const sessionData = await sessions.findAll();
+    const he = req.query.he || 'teja';
     // const sessions = await sessions.findAll();
     // const adminName = global.adminFirstName+global.adminLastName;
     // const adminEmail=global.adminEmail
-    res.render('admin', { sports: sportsList, matches: matchesList, sessionData,adminName,adminEmail});
+    console.log(he,"heidsfj");
+    res.render('admin', { sports: sportsList, matches: matchesList, sessionData,adminName,adminEmail,he});
     } catch (error) {
     console.error(error);
     return res.status(422).json(error);
@@ -326,34 +362,26 @@ app.get('/user', async (req, res) => {
     const adminName = global.userFullname;
     const adminEmail=global.userEmail
     console.log(adminEmail,adminName)
+    const him="please login"
     // console.log(userName,"email:",userEmail)
     if (adminEmail===undefined || adminName===undefined) {
-      res.redirect('login');
+      res.redirect('/login?him=' + encodeURIComponent(him));
     }
+    const he = req.query.he || 'teja';
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
     const sessionData = await sessions.findAll();
-    res.render('user', { sports: sportsList, matches: matchesList, sessionData,adminName,adminEmail});
+    res.render('user', { sports: sportsList, matches: matchesList, sessionData,adminName,adminEmail,he});
     } catch (error) {
     console.error(error);
     return res.status(422).json(error);
   }
 });
 
-app.get('/t',async(req,res)=>{
-  try {
-    const sportsList = await sports.findAll();
-    const matchesList = await matches.findAll();
-    const sessionData = await sessions.findAll();
-    res.render('a', { sports: sportsList, matches: matchesList, sessionData});
-    } catch (error) {
-    console.error(error);
-    return res.status(422).json(error);
-  }
-})
 
 app.post('/createsport',async(req,res)=>{
   const { sport, admin } = req.body;
+  const he="createsport"
   try {
     const newsport = await sports.create({
       // await sports.create({
@@ -361,7 +389,7 @@ app.post('/createsport',async(req,res)=>{
       admin: admin
     });
     console.log(newsport);
-    res.redirect('admin')
+    res.redirect(`admin?he=${he}`);
   } catch (error) {
     console.error(error);
     return res.status(422).json(error);
@@ -370,6 +398,7 @@ app.post('/createsport',async(req,res)=>{
 
 app.post('/creatematch', async (req, res) => {
   const { sport, admin, date, venue, match,teamsize,timein,timeout } = req.body;
+  const he="creatematch"
   // console.log(sport,timeout,typeof timein);
   // If deleteMatch is not selected, proceed with creating a new match
   try {
@@ -386,10 +415,10 @@ app.post('/creatematch', async (req, res) => {
     const adminmail=global.adminEmail
     const usermail=global.userEmail
     if(usermail==undefined){
-      res.redirect('admin');
+      res.redirect(`admin?he=${he}`);
     }
     if(adminmail==undefined){
-      res.redirect('user')
+      res.redirect(`user?he=${he}`);
     }
   } catch (error) {
     console.error(error);
@@ -402,6 +431,7 @@ app.post('/deletematchforms', async (req, res) => {
   try {
     const deleteMatches = req.body.deleteMatch;
     const reasons = req.body.reason;
+    const he="deletematchforms"
     console.log(deleteMatches, reasons);
 
     // Assuming deleteMatches and reasons are arrays of the same length
@@ -456,13 +486,9 @@ app.post('/deletematchforms', async (req, res) => {
       console.log('No data found.');
     }
   }
-  const adminmail=global.adminEmail
   const usermail=global.userEmail
   if(usermail==undefined){
-    res.redirect('admin');
-  }
-  if(adminmail==undefined){
-    res.redirect('user')
+    res.redirect(`admin?he=${he}`);
   }
   } catch (error) {
     console.error(error);
@@ -470,15 +496,11 @@ app.post('/deletematchforms', async (req, res) => {
   }
 });
 
- 
-
-
-
-
 app.post('/deletematch', async (req, res) => {
   try {
     const deleteMatches = req.body.deleteMatch;
     const reasons = req.body.reason;
+    const he="deletematch"
     console.log(deleteMatches, reasons);
     let i = -1;
     for (let j = 0; j < reasons.length; j++) {
@@ -501,7 +523,6 @@ app.post('/deletematch', async (req, res) => {
       });
 
       if (matchRecord) {
-        // Update the 'reason' column
         await matchRecord.update({
           reason: reasons[i],
         });
@@ -531,20 +552,27 @@ app.post('/deletematch', async (req, res) => {
       console.log('No data found.');
     }
   }
-    res.redirect('user');
-  } catch (error) {
+  const adminmail=global.adminEmail
+  const usermail=global.userEmail
+  if(usermail==undefined){
+    res.redirect(`admin?he=${he}`);
+  }
+  if(adminmail==undefined){
+    res.redirect(`user?he=${he}`);
+  }
+} catch (error) {
     console.error(error);
     return res.status(422).json(error);
   }
 });
+
 app.post('/joinmatch', async (req, res) => {
   const { admin, selectedInfo} = req.body;
   console.log("print this ",selectedInfo)
-  
+  const he="joinmatch"
   // Split the selectedInfo into match and sport
   const [selectedMatch, selectedSport,date,timein,timeout] = selectedInfo.split('#');
   console.log(selectedSport,date,admin,timein,timeout)
-
   try {
       // Create a new match in the 'session' table
       const newMatch1 = await sessions.create({
@@ -554,11 +582,15 @@ app.post('/joinmatch', async (req, res) => {
       });
     const adminmail=global.adminEmail
     const usermail=global.userEmail
+    console.log(adminmail,usermail,"dfsx")
     if(usermail==undefined){
-      res.redirect('admin');
+      console.log(adminmail,usermail,"dfsp")
+
+      res.redirect(`admin?he=${he}`);
     }
     if(adminmail==undefined){
-      res.redirect('user')
+      console.log(adminmail,usermail,"dfsp")
+      res.redirect(`user?he=${he}`);
     }
     }
    catch (error) {
@@ -572,16 +604,3 @@ app.post('/joinmatch', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
-
-
-
-
-// app.post('/crt',function(req,res){
-//     console.log("/a route ",req.body)
-// })
-// app.put('/crt/:match',function(req,res){
-//     console.log("update match",req.params.id)
-// })
-// app.delete("/crt/:match",function(req,res){
-//     console.log("deleted",req.params.delete)
-// })

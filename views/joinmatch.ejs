@@ -107,8 +107,8 @@ var selectedValue = null;
         const dtend1 = new Date(`${date}T${timeout}`);
         const dtstart2 = new Date(`${selectedDate}T${selectedTimein}`);
         const dtend2 = new Date(`${selectedDate}T${selectedTimeout}`);
-        if (!(dtend1 < dtstart2 || dtend2 < dtstart2)) {
-          alert('You have a ' + sport + ' match (' + match + ') scheduled during that time.');
+        if (!(dtend2 < dtstart1 || dtend1 < dtstart2)) {
+          alert('You have a ' + sport + ' match (' + match+'scheduled during that time.');
             return false;
         }
     }
@@ -136,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 function anotherFunction() {
                     console.log('Accessing selectedValue in another function:', selectedValue);
                 }
-
-                // Example of using selectedValue in another function
                 anotherFunction();
             })();
         });

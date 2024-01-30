@@ -9,7 +9,7 @@
 <body>
     <div id="createsport">
     <h1>Create Sport Form</h1>
-    <form action="/createsport" method="post">
+    <form action="/createsport" method="post" onsubmit="return a()">
         <label for="sport">Select a Sport:</label>
         <select id="sport" name="sport" required>
           <option value="football">Football</option>
@@ -24,7 +24,6 @@
           <option value="rugby">Rugby</option>
           <option value="hockey">Hockey</option>
           <option value="table tennis">Table Tennis</option>
-          <!-- Add more sport options as needed -->
         </select>        <br>
         <!-- <label for="admin">Admin:</label> -->
         <input type="hidden" id="admin" name="admin" value="<%= adminName %>" required>
@@ -32,5 +31,16 @@
         <button type="submit">Submit</button>
       </form>
     </div>
+    <script>
+      function a(){
+let selectedSport = document.getElementById("sport").value;
+<% matches.forEach(function(sport) { %>
+    if ("<%= sport.sport %>" === selectedSport) {
+        alert("Sport is already added in matches");
+        return false;
+    }
+<% }) %>
+  }
+    </script>
 </body>
 </html>

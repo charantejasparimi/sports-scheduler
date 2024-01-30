@@ -1,23 +1,122 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Sport Form</title>
+  <title>Sports Scheduler - Display Individual</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .content {
+      margin-left: 200px; /* Adjust this value based on your design */
+      padding: 20px;
+    }
+
+    .dynamic-content {
+      display: none;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    /* Add more styles for your specific content if needed */
+  </style>
 </head>
 <body>
-  <h1>Welcome <%=adminName %> &nbsp;<%=adminEmail %></h1>
-  
-<%- include('creatematch.ejs') %>
-<!-- joinmatch -->
-<%-include('joinmatch.ejs')%>
-<!-- displayall -->
-<%-include('displayall.ejs')%>
-<!-- displayindividual --> 
-<%-include('displayindividual.ejs')%>
-<!-- deletematch -->
-<%-include('deletematch.ejs')%>
+  <div class="navbar">
+    <a href="#" onclick="showContent('userInformation')">Display Individual</a>
+    <a href="#" onclick="showContent('createMatch')">Create Match</a>
+    <a href="#" onclick="showContent('joinMatch')">Join Match</a>
+<a href="#" onclick="showContent('displayAll')">Display All Players</a>
+<a href="#" onclick="showContent('deleteMatches')">Delete Matches</a>
+<a href="#" onclick="showContent('deletedItems')">Deleted Items</a>
 
+    <!-- Add more links as needed -->
+  </div>
 
+  <div class="content">
+    <h1>Welcome <%= adminName %> &nbsp;<%= adminEmail %></h1>
+    <%=he%>
+    <div id="userInformation" class="dynamic-content">
+      <h2>User Information</h2>
+      <p>Name: John Doe</p>
+      <p>Email: john.doe@example.com</p>
+      <!-- Add more content as needed -->
+    </div>
+    <div id="displayAll" class="dynamic-content">
+      <!-- Content for Create Match goes here -->
+      <%- include('displayall.ejs')%>
+    </div>   
+    <div id="deleteMatches" class="dynamic-content">
+      <!-- Content for Create Sport goes here -->
+      <%- include('deletematch.ejs')%>
+    </div>
+    <div id="deletedItems" class="dynamic-content">
+      <%- include('deleteditems.ejs')%>
+    </div>
+    <div id="createMatch" class="dynamic-content">
+      <%- include('creatematch.ejs')%>
+    </div>
+    <div id="joinMatch" class="dynamic-content">
+      <!-- Content for Create Match goes here -->
+      <%- include('joinmatch.ejs')%>
+    </div>
+  </div>
+  <script>
+    alert("hello<%=he%>")
+  if ("<%= he %>" === "joinmatch") {
+    window.onload = function() {
+        alert("joined match");
+    };
+} else if ("<%= he %>" === "creatematch") {
+    window.onload = function() {
+        alert("created match");
+    };
+} else if ("<%= he %>" === "deletematch") {
+    window.onload = function() {
+        alert("deleted match");
+    };
+} else if ("<%= he %>" === "displayindividual") {
+    window.onload = function() {
+        alert("display individual matches");
+    };
+}
+ 
+</script>
+  <script>
+    function showContent(contentId) {
+      // Hide all dynamic content sections
+      const dynamicContents = document.querySelectorAll('.dynamic-content');
+      dynamicContents.forEach(content => content.style.display = 'none');
+
+      // Show the selected content
+      document.getElementById(contentId).style.display = 'block';
+    }
+  </script>
 </body>
-
 </html>
