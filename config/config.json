@@ -7,7 +7,7 @@
     "dialect": "postgres",
     "logging":false
   },
-  "test": {
+  "test": {  
     "username": "root",
     "password": "9090",
     "database": "capstone_test",

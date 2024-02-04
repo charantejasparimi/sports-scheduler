@@ -192,6 +192,7 @@ app.post("/sectionPlayer",passport.authenticate("local", {
   }
 );
 
+
 app.post(
   "/sectionAdmin",
   passport.authenticate("local", {
@@ -340,9 +341,9 @@ app.get('/admin', async (req, res) => {
     const adminEmail=global.adminEmail
     const him="please login"
     console.log("Email :",adminEmail,"Name",adminName)
-    if (adminEmail==undefined || adminName==undefined) {
-      res.redirect('/login?him=' + encodeURIComponent(him));
-    } 
+    // if (adminEmail==undefined || adminName==undefined) {
+    //   res.redirect('/login?him=' + encodeURIComponent(him));
+    // } 
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
     const sessionData = await sessions.findAll();
@@ -364,9 +365,9 @@ app.get('/user', async (req, res) => {
     console.log(adminEmail,adminName)
     const him="please login"
     // console.log(userName,"email:",userEmail)
-    if (adminEmail===undefined || adminName===undefined) {
-      res.redirect('/login?him=' + encodeURIComponent(him));
-    }
+    // if (adminEmail===undefined || adminName===undefined) {
+    //   res.redirect('/login?him=' + encodeURIComponent(him));
+    // }
     const he = req.query.he || 'teja';
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();

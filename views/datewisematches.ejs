@@ -4,9 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* General styling for the entire container */
+div.current {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the main heading */
+h1.a {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Styling for each date section */
+h2.b {
+    color: #007bff;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* Styling for the total matches paragraph */
+p.c {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Styling for the list of matches */
+ul.d {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Styling for each sport entry */
+li.e {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for each sport entry */
+li.e:hover {
+    background-color: #f0f0f0;
+}
+
+/* Styling for the match details */
+li.e strong {
+    color: #007bff;
+}
+
+/* Styling for the "No upcoming matches found" paragraph */
+p.f {
+    color: #555;
+    font-style: italic;
+}
+
+/* Animation for the hover effect */
+li.e {
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+li.e:hover {
+    transform: scale(1.05);
+}
+
+    </style>
 </head>
 <body>
-<h1>Matches from the Current Date Onwards</h1>
+    <div class="current">
+<h1 class="a">Matches from the Current Date Onwards</h1>
 
     <% const currentDate = new Date().toISOString().split('T')[0]; %>
 
@@ -14,17 +87,17 @@
 
     <% if (futureDates.length > 0) { %>
         <% futureDates.sort().forEach(date => { %>
-            <h2>Matches on <%= date %></h2>
+            <h2 class="b">Matches on <%= date %></h2>
 
             <% const matchesForDate = matches.filter(match => match.date === date); %>
 
-            <p>Total Matches: <%= matchesForDate.length %></p>
+            <p class="c">Total Matches: <%= matchesForDate.length %></p>
 
-            <ul>
+            <ul class="d">
                 <% const uniqueSports = Array.from(new Set(matchesForDate.map(match => match.sport))); %>
 
                 <% uniqueSports.forEach(sport => { %>
-                    <li>
+                    <li class="e">
                         <strong><%= sport %></strong> - <%= matchesForDate.filter(match => match.sport === sport).length %>&nbsp;matches<br>
                        <% matchesForDate.forEach(match => { %>
                             <%if(match.reason==null){%>
@@ -37,7 +110,9 @@
 
         <% }); %>
     <% } else { %>
-        <p>No upcoming matches found.</p>
+        <p class="f">No upcoming matches found.</p>
     <% } %>
+
+</div>
 </body>
 </html>
