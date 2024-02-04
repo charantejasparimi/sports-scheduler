@@ -130,20 +130,18 @@
         });
         
         function validateDate() {
-        // Get the selected date from the radio button
         const selectedDateInput = document.querySelector('input[name^="datee"]:checked');
         const [, , dateValue] = selectedDate.split(':');
         console.log("Extracted Date:", dateValue);
-        // Compare the selected date with today's date
         const currentDate = new Date();
         const selectedMatchDate = new Date(selectedDate);
       
         if (selectedMatchDate < '2023-03-01') {
           alert('Cannot join past matches. Please select a future match.');
-          return false; // Prevent form submission
+          return false; 
         }
       
-        return true; // Allow form submission
+        return true; 
       }
       </script>
 </body>

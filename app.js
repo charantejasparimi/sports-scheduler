@@ -341,9 +341,9 @@ app.get('/admin', async (req, res) => {
     const adminEmail=global.adminEmail
     const him="please login"
     console.log("Email :",adminEmail,"Name",adminName)
-    // if (adminEmail==undefined || adminName==undefined) {
-    //   res.redirect('/login?him=' + encodeURIComponent(him));
-    // } 
+    if (adminEmail==undefined || adminName==undefined) {
+      res.redirect('/login?him=' + encodeURIComponent(him));
+    } 
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
     const sessionData = await sessions.findAll();
@@ -364,10 +364,10 @@ app.get('/user', async (req, res) => {
     const adminEmail=global.userEmail
     console.log(adminEmail,adminName)
     const him="please login"
-    // console.log(userName,"email:",userEmail)
-    // if (adminEmail===undefined || adminName===undefined) {
-    //   res.redirect('/login?him=' + encodeURIComponent(him));
-    // }
+    console.log(userName,"email:",userEmail)
+    if (adminEmail===undefined || adminName===undefined) {
+      res.redirect('/login?him=' + encodeURIComponent(him));
+    }
     const he = req.query.he || 'teja';
     const sportsList = await sports.findAll();
     const matchesList = await matches.findAll();
@@ -513,7 +513,7 @@ app.post('/deletematch', async (req, res) => {
 
     if (i !== -1) {
       console.log('Index of the first non-empty string:', i);
-      const [sport, match] = deleteMatches[i].split(':');
+      const [sport, match] = deleteMatches.split(':');
       console.log("sport", sport, match);
 
       const matchRecord = await matches.findOne({

@@ -106,7 +106,7 @@ var selectedValue = null;
         let a = document.getElementById(x).value;
         let [sport, match, date, timein, timeout] = a.split('#');
         if (match == selectedMatch && sport == selectedSport) {
-            alert("You have already joined this match."+match+sport+selectedMatch+selectedSport);
+            alert("You have already joined this match.");
             return false;
         }
         const dtstart1 = new Date(`${date}T${timein}`);
@@ -114,7 +114,7 @@ var selectedValue = null;
         const dtstart2 = new Date(`${selectedDate}T${selectedTimein}`);
         const dtend2 = new Date(`${selectedDate}T${selectedTimeout}`);
         if (!(dtend2 < dtstart1 || dtend1 < dtstart2)) {
-          alert('You have a ' + sport + ' match (' + match+'scheduled during that time.');
+          alert('You have a ' + sport + ' match (' + match+')scheduled during that time.');
             return false;
         }
     }
