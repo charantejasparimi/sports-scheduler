@@ -334,7 +334,7 @@ app.get("/signout", (request, response, next) => {
     }
     response.redirect("/");
   });
-});
+}); 
 app.get('/admin', async (req, res) => {
   try {
     const adminName = global.adminFirstName+global.adminLastName;
@@ -364,7 +364,7 @@ app.get('/user', async (req, res) => {
     const adminEmail=global.userEmail
     console.log(adminEmail,adminName)
     const him="please login"
-    console.log(userName,"email:",userEmail)
+    console.log(adminName,"email:",adminEmail)
     if (adminEmail===undefined || adminName===undefined) {
       res.redirect('/login?him=' + encodeURIComponent(him));
     }
