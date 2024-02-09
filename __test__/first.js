@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
 const app = require('./app'); 
-
 // eslint-disable-next-line no-undef
 describe('Sports Scheduler', () => {
   let server;

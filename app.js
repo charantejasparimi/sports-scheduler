@@ -14,8 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,"public")))
 app.set("view engine","ejs")
-
-app.use(
+app.use( 
   sess({
     secret: "my-secret-key-127287123873",
     cookie: {
