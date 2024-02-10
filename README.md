@@ -2,7 +2,10 @@
 
 ## Overview
 
-Welcome to SportSlate, the cutting-edge Sports Scheduler web application! This repository showcases the culmination of skills developed throughout the WD501 course. Dive into the world of sports event planning and organization with our feature-rich platform.
+Welcome to SportSlate, the cutting-edge Sports Scheduler web application! This repository showcases the culmination of skills developed throughout the WD501 course. Dive into the world of sports event planning and organization with our feature-rich platform. 
+## Sports Scheduler
+
+This web application helps you schedule sports events efficiently. Visit [Sports Scheduler](https://sports-scheduler-tw8m.onrender.com/) to get started.
 
 ## Project Highlights
 
