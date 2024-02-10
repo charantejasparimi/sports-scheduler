@@ -9,7 +9,7 @@ Welcome to SportSlate, the cutting-edge Sports Scheduler web application! This r
 ### The Challenge 🌟
 
 In the final level of WD501, participants were tasked with creating a Sports Scheduler from scratch. The objective was to design a tool allowing individuals to set up matches, fostering greater participation in sports.
-
+![Login Page](public/Screenshot_2024-02-10-09-34-21-759_com.brave.browser.jpg)
 ### Personas 🚀
 
 Our application caters to two main personas:
@@ -18,6 +18,8 @@ Our application caters to two main personas:
 - Manages available sports effortlessly.
 - Creates and edits various sports options.
 - Gains insights through detailed reports of games played.
+![Admin Dashboard](public/Screenshot_2024-02-10-09-35-26-301_com.brave.browser.jpg)
+
 
 #### The Player 🏅
 - Easily signs up and signs in using email and password.
@@ -41,7 +43,7 @@ Our application caters to two main personas:
 
 5. **Admins can create a sport session:**
    - Administrators enjoy the same seamless session creation
-
+![Create Match](public/Screenshot_2024-02-10-09-34-43-911_com.brave.browser.jpg)
 ## Getting Started 🚀
 
 1. **Clone the repository to your local machine.**
